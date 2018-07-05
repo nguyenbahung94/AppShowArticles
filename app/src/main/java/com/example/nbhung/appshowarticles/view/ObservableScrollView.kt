@@ -23,20 +23,16 @@ class ObservableScrollView : ScrollView {
         this.scrollViewListener = scrollViewListener
     }
 
-    fun startLoad() {
-        isLoading = true
-    }
-
     fun completeLoad() {
         isLoading = false
     }
 
     override fun onScrollChanged(x: Int, y: Int, oldx: Int, oldy: Int) {
-        super.onScrollChanged(x, y, oldx, oldy)
         val diff = this.getChildAt(this.childCount - 1).bottom - (this.height + this.scrollY)
         if (scrollViewListener != null && diff == 0 && !isLoading) {
+            isLoading = true
             scrollViewListener!!.onScrollEnded(this, x, y, oldx, oldy)
-        }
+        } else super.onScrollChanged(x, y, oldx, oldy)
 
     }
 

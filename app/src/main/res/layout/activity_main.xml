@@ -8,6 +8,7 @@
 
     <com.example.nbhung.appshowarticles.view.ObservableScrollView
         android:id="@+id/mScrollView"
+        android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
