@@ -4,11 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
-    <ScrollView
+    <com.example.nbhung.appshowarticles.view.ObservableScrollView
         android:id="@+id/mScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/mLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </com.example.nbhung.appshowarticles.view.ObservableScrollView>
 
 </android.support.constraint.ConstraintLayout>
