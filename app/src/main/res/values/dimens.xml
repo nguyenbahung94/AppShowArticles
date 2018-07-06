@@ -6,4 +6,5 @@
     <dimen name="marginleft_15dp">15dp</dimen>
     <dimen name="item_ll__height_100dp">110dp</dimen>
     <dimen name="imv_margin_5dp">5dp</dimen>
+    <dimen name="img_padding_10dp">10dp</dimen>
 </resources>

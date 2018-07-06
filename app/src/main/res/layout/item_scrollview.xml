@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvName"
@@ -39,7 +40,8 @@
             android:layout_margin="@dimen/imv_margin_5dp"
             android:layout_weight="1"
             android:contentDescription="@string/contentdescription"
-            tools:src="@drawable/imgtest" />
+            android:padding="@dimen/img_padding_10dp"
+            android:src="@drawable/image_loading" />
 
         <ImageView
             android:id="@+id/imvContent2"
@@ -48,7 +50,8 @@
             android:layout_margin="@dimen/imv_margin_5dp"
             android:layout_weight="1"
             android:contentDescription="@string/contentdescription"
-            tools:src="@drawable/imgtest" />
+            android:padding="@dimen/img_padding_10dp"
+            android:src="@drawable/image_loading" />
 
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

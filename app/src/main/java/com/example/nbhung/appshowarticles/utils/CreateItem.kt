@@ -1,24 +1,9 @@
 package com.example.nbhung.appshowarticles.utils
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.example.nbhung.appshowarticles.R
 import com.example.nbhung.appshowarticles.model.Articles
-import com.example.nbhung.appshowarticles.view.ObservableScrollView
-import kotlinx.android.synthetic.main.item_scrollview.view.*
 import org.json.JSONArray
 
-fun addSingleItem(context: Context, view: ViewGroup, articles: Articles) {
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    val item = inflater.inflate(R.layout.item_scrollview, null)
-    item.tvName.text = articles.name
-    item.tvContent.text = articles.content
-    Glide.with(context).load(articles.urlImage).into(item.imvContent)
-    Glide.with(context).load(articles.urlVideo).into(item.imvContent2)
-    return view.addView(item)
-}
 
 fun getJson(context: Context): ArrayList<Articles> {
     val listItems = ArrayList<Articles>()
@@ -33,9 +18,10 @@ fun getJson(context: Context): ArrayList<Articles> {
     return listItems
 }
 
-fun addItemToScrollView(currentList: ArrayList<Articles>, currentItems: Int, view: ViewGroup, context: Context, scrollView: ObservableScrollView, numberOfAddItem: Int = 10) {
-    for (i in currentItems until currentItems + numberOfAddItem) {
-        addSingleItem(context, view, currentList[i])
+fun addItemToCurrentList(bigList: ArrayList<Articles>, currentList: ArrayList<Articles>, numberOfItem: Int = 10) {
+    if (currentList.size <= bigList.size) {
+        for (i in currentList.size until currentList.size + numberOfItem) {
+            currentList.add(bigList[i])
+        }
     }
-    scrollView.completeLoad()
 }

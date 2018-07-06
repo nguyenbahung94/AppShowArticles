@@ -1,36 +1,36 @@
 package com.example.nbhung.appshowarticles.view
 
-import android.annotation.SuppressLint
+import android.database.DatabaseUtils
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import android.support.v7.widget.LinearLayoutManager
 import com.example.nbhung.appshowarticles.R
 import com.example.nbhung.appshowarticles.model.Articles
-import com.example.nbhung.appshowarticles.utils.addItemToScrollView
+import com.example.nbhung.appshowarticles.utils.addItemToCurrentList
 import com.example.nbhung.appshowarticles.utils.getJson
-import com.example.nbhung.appshowarticles.view.listener.ScrollViewListener
+import com.example.nbhung.appshowarticles.view.adapter.ArticlesAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), ScrollViewListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var listArticles: ArrayList<Articles>
-    private var currentItems = 0
+    private val currentListArticles = ArrayList<Articles>()
+    private var adapterArticle: ArticlesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mScrollView.setScrollViewListener(this)
         listArticles = getJson(this@MainActivity)
-        addArticles()
+        setupRecycleView()
     }
 
-    private fun addArticles() {
-        Log.e("MainActivity", "add item to list")
-        addItemToScrollView(listArticles, currentItems, mLL, this@MainActivity,mScrollView)
-    }
-
-    override fun onScrollEnded(scrollView: ObservableScrollView, x: Int, y: Int, oldx: Int, oldy: Int) {
-        addArticles()
+    private fun setupRecycleView() {
+        mRecycleView.layoutManager = LinearLayoutManager(this)
+        mRecycleView.setHasFixedSize(true)
+        mRecycleView.setItemViewCacheSize(10000)
+        adapterArticle = ArticlesAdapter(currentListArticles, this@MainActivity)
+        mRecycleView.adapter = adapterArticle
+        addItemToCurrentList(listArticles, currentListArticles)
+        adapterArticle!!.notifyDataSetChanged()
     }
 }
