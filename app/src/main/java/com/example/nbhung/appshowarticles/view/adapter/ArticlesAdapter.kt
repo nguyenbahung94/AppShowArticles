@@ -8,9 +8,15 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.nbhung.appshowarticles.R
 import com.example.nbhung.appshowarticles.model.Articles
+import com.example.nbhung.appshowarticles.view.listener.MyOnclickListener
 import kotlinx.android.synthetic.main.item_scrollview.view.*
 
 class ArticlesAdapter(private val listArticle: ArrayList<Articles>, private val context: Context) : RecyclerView.Adapter<ArticlesAdapter.ArticlesHolder>() {
+    private var mClick: MyOnclickListener? = null
+    fun setMyclick(mClick: MyOnclickListener) {
+        this@ArticlesAdapter.mClick = mClick
+    }
+
     override fun getItemCount(): Int = listArticle.size
 
     override fun onBindViewHolder(holder: ArticlesHolder, position: Int) {
@@ -19,16 +25,19 @@ class ArticlesAdapter(private val listArticle: ArrayList<Articles>, private val 
         holder.tvContent.text = currentArticle.content
         Glide.with(context).load(currentArticle.urlImage).into(holder.imageView)
         Glide.with(context).load(currentArticle.urlImage).into(holder.imageViewVideo)
+        holder.mLL.setOnClickListener { v -> mClick!!.onclickItem(v, position) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesHolder {
         return ArticlesHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_scrollview, parent, false))
     }
 
+    companion object
     class ArticlesHolder(v: View) : RecyclerView.ViewHolder(v) {
         val tvName = v.tvName!!
         val tvContent = v.tvContent!!
         val imageView = v.imvContent!!
         val imageViewVideo = v.imvContent2!!
+        val mLL = v.mLL!!
     }
 }

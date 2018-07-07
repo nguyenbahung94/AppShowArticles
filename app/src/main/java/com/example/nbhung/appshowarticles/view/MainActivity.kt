@@ -1,17 +1,26 @@
 package com.example.nbhung.appshowarticles.view
 
-import android.database.DatabaseUtils
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.widget.Toast
 import com.example.nbhung.appshowarticles.R
 import com.example.nbhung.appshowarticles.model.Articles
 import com.example.nbhung.appshowarticles.utils.addItemToCurrentList
 import com.example.nbhung.appshowarticles.utils.getJson
+import com.example.nbhung.appshowarticles.utils.isTheLastItem
 import com.example.nbhung.appshowarticles.view.adapter.ArticlesAdapter
+import com.example.nbhung.appshowarticles.view.listener.MyOnclickListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), MyOnclickListener {
+    override fun onclickItem(v: View, position: Int) {
+        Toast.makeText(this@MainActivity, "position = $position", Toast.LENGTH_SHORT).show()
+    }
 
     private lateinit var listArticles: ArrayList<Articles>
     private val currentListArticles = ArrayList<Articles>()
@@ -27,9 +36,21 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecycleView() {
         mRecycleView.layoutManager = LinearLayoutManager(this)
         mRecycleView.setHasFixedSize(true)
-        mRecycleView.setItemViewCacheSize(10000)
         adapterArticle = ArticlesAdapter(currentListArticles, this@MainActivity)
+        adapterArticle!!.setMyclick(this)
         mRecycleView.adapter = adapterArticle
+        addItems()
+        mRecycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (isTheLastItem(mRecycleView))
+                    addItems()
+
+            }
+        })
+    }
+
+    private fun addItems() {
         addItemToCurrentList(listArticles, currentListArticles)
         adapterArticle!!.notifyDataSetChanged()
     }

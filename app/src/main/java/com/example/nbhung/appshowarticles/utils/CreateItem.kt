@@ -1,6 +1,9 @@
 package com.example.nbhung.appshowarticles.utils
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.example.nbhung.appshowarticles.model.Articles
 import org.json.JSONArray
 
@@ -19,9 +22,24 @@ fun getJson(context: Context): ArrayList<Articles> {
 }
 
 fun addItemToCurrentList(bigList: ArrayList<Articles>, currentList: ArrayList<Articles>, numberOfItem: Int = 10) {
-    if (currentList.size <= bigList.size) {
-        for (i in currentList.size until currentList.size + numberOfItem) {
-            currentList.add(bigList[i])
+    if (currentList.size < bigList.size) {
+        if (currentList.size + numberOfItem <= bigList.size)
+            for (i in currentList.size until currentList.size + numberOfItem) {
+                currentList.add(bigList[i])
+            } else {
+            for (i in currentList.size until bigList.size) {
+                currentList.add(bigList[i])
+            }
         }
     }
+}
+
+fun isTheLastItem(mRecycleView: RecyclerView): Boolean {
+    val layoutManager = mRecycleView.layoutManager as LinearLayoutManager
+    val pos = layoutManager.findLastCompletelyVisibleItemPosition()
+    val numItems = mRecycleView.adapter.itemCount
+    if (pos >= numItems - 1) {
+        return true
+    }
+    return false
 }
