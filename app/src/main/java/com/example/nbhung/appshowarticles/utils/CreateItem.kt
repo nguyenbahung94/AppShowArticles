@@ -3,11 +3,12 @@ package com.example.nbhung.appshowarticles.utils
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.example.nbhung.appshowarticles.model.Articles
 import org.json.JSONArray
 
-
+/*
+* get list Articles from file json local
+* */
 fun getJson(context: Context): ArrayList<Articles> {
     val listItems = ArrayList<Articles>()
     val jsonString = context.assets.open("listItems.json").bufferedReader().use {
@@ -20,7 +21,9 @@ fun getJson(context: Context): ArrayList<Articles> {
     }
     return listItems
 }
-
+/*
+* each time add 10 items from parent list to current list
+* */
 fun addItemToCurrentList(bigList: ArrayList<Articles>, currentList: ArrayList<Articles>, numberOfItem: Int = 10) {
     if (currentList.size < bigList.size) {
         if (currentList.size + numberOfItem <= bigList.size)
@@ -33,7 +36,9 @@ fun addItemToCurrentList(bigList: ArrayList<Articles>, currentList: ArrayList<Ar
         }
     }
 }
-
+ /*
+ * check when scrolling at bottom of recyclerview
+ * */
 fun isTheLastItem(mRecycleView: RecyclerView): Boolean {
     val layoutManager = mRecycleView.layoutManager as LinearLayoutManager
     val pos = layoutManager.findLastCompletelyVisibleItemPosition()
