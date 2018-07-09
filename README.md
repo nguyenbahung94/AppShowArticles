@@ -3,7 +3,7 @@
 <ul>Each Item have name ,content and 2 two picture.</ul>
 
 # Development setup
-First off, you require the latest Android Studio 3.0 (or newer) to be able to build the app.
+<ul>First off, you require the latest Android Studio 3.0 (or newer) to be able to build the app.</ul>
 
 # Installation
 <ul>Right now I don't publish my app in the app store.So just clone repository and open it in Android Studio.For there,you can easily load a build of the app into your android device.</ul>
@@ -22,10 +22,11 @@ First off, you require the latest Android Studio 3.0 (or newer) to be able to bu
 <ul>At the first time I will automatic add 10 items into current list.</ul>
 <ul>When the user scroll the recyclerview I will check If position is the end of list I will call method to add more 10 items from big list to current list.</ul>
 <ul>Each time add 10 items I will check</ul>
+<ul>
          <ul>If (the current list size + 10 <= big list size)</ul>
            <li> I will add 10 items from position is (size of current list) until (size of current list +10)</li>
          <ul>else</ul> 
            <li> I will add 10 items from position is (size of current list) until (size of big list)</li>
-             
+ </ul>
 <ul>If the current list size < big list size the method add more 10 items will working but If not the method will not working.</ul>
 
