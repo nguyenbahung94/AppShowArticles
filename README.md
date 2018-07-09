@@ -22,11 +22,9 @@
 <ul>At the first time I will automatic add 10 items into current list.</ul>
 <ul>When the user scroll the recyclerview I will check If position is the end of list I will call method to add more 10 items from big list to current list.</ul>
 <ul>Each time add 10 items I will check</ul>
-<ul>
          <ul>If (the current list size + 10 <= big list size)</ul>
-           <li> I will add 10 items from position is (size of current list) until (size of current list +10)</li>
+            <ul> I will add 10 items from position is (size of current list) until (size of current list +10)</ul>
          <ul>else</ul> 
-           <li> I will add 10 items from position is (size of current list) until (size of big list)</li>
- </ul>
+           <ul> I will add 10 items from position is (size of current list) until (size of big list)</ul>
 <ul>If the current list size < big list size the method add more 10 items will working but If not the method will not working.</ul>
 
